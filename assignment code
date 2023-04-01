@@ -1,0 +1,58 @@
+#include<iostream>
+using namespace std;
+class myvector{
+	private :
+		
+	int arr[3];
+	public :
+		
+			myvector() {
+				arr[0]=0;
+				arr[1]=0;
+				arr[1]=0;
+			}
+			myvector(int a, int b, int c){
+				arr[0]=a;
+				arr[1]=b;
+				arr[1]=c;
+				
+			}
+			myvector operator + (myvector v2){
+				
+				for(int i=0; i<3; i++){
+					v2.arr[i]= arr[i]+v2.arr[i];
+				}
+				return v2;
+			}
+			 myvector operator*(const myvector &v) { //Defining * as operator for doing Cross Product
+        myvector a;
+        a.arr[0] = arr[1] * v.arr[2] - arr[2] * v.arr[1];
+        a.arr[1] = arr[2] * v.arr[0] - arr[0] * v.arr[2];
+        a.arr[2] = arr[0] * v.arr[1] - arr[1] * v.arr[0];
+        return a;
+    }
+			~myvector (){
+			};
+			void show()
+			{
+				cout<<"This is the vector :"<<endl;
+				for(int i=0; i<3; i++){
+					cout<<arr[i]<<" ";
+				}
+				cout<<endl;
+			}
+			
+	
+};
+
+int main()
+{
+	myvector v(1,2,3);
+	v.show();
+	
+	myvector V(4,5,6);
+	V.show();
+	cout<<"The sum is "<<'v+V'<<endl;
+cout<<"The dot is "<<'v&V'<<endl;
+return 0;
+}
