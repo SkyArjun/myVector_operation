@@ -1,58 +1,66 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-class myvector{
-	private :
-		
-	int arr[3];
-	public :
-		
-			myvector() {
-				arr[0]=0;
-				arr[1]=0;
-				arr[1]=0;
-			}
-			myvector(int a, int b, int c){
-				arr[0]=a;
-				arr[1]=b;
-				arr[1]=c;
-				
-			}
-			myvector operator + (myvector v2){
-				
-				for(int i=0; i<3; i++){
-					v2.arr[i]= arr[i]+v2.arr[i];
-				}
-				return v2;
-			}
-			 myvector operator*(const myvector &v) { //Defining * as operator for doing Cross Product
-        myvector a;
-        a.arr[0] = arr[1] * v.arr[2] - arr[2] * v.arr[1];
-        a.arr[1] = arr[2] * v.arr[0] - arr[0] * v.arr[2];
-        a.arr[2] = arr[0] * v.arr[1] - arr[1] * v.arr[0];
-        return a;
+class myVector {
+private:
+    int V[3];
+
+public:
+    myVector() {}
+
+//Here we define 3 arrys as vector coeficient V[0]i + V[1]j + V[2]k
+    myVector(int x, int y, int z) 
+	{
+        V[0] = x;
+        V[1] = y;
+        V[2] = z;
     }
-			~myvector (){
-			};
-			void show()
-			{
-				cout<<"This is the vector :"<<endl;
-				for(int i=0; i<3; i++){
-					cout<<arr[i]<<" ";
-				}
-				cout<<endl;
-			}
-			
-	
+
+    myVector operator+(const myVector &v) { // Defining + as operator for sum
+        myVector eg;
+        eg.V[0] = V[0] + v.V[0];
+        eg.V[1] = V[1] + v.V[1];
+        eg.V[2] = V[2] + v.V[2];
+        return eg;
+    }
+
+    myVector operator*(const myVector &v) { //Defining * as operator for doing Cross Product
+        myVector eg;
+        eg.V[0] = V[1] * v.V[2] - V[2] * v.V[1];
+        eg.V[1] = V[2] * v.V[0] - V[0] * v.V[2];
+        eg.V[2] = V[0] * v.V[1] - V[1] * v.V[0];
+        return eg;
+    }
+
+    int operator&(const myVector &v) {  //Defining & as operator for Dot Product
+        int eg = 0;
+        eg += V[0] * v.V[0];
+        eg += V[1] * v.V[1];
+        eg += V[2] * v.V[2];
+        return eg;
+    }
+
+    void print() {
+        cout << V[0] << "i + (" << V[1] << ")j + (" << V[2] << ")k\n";
+    }
 };
 
-int main()
-{
-	myvector v(1,2,3);
-	v.show();
-	
-	myvector V(4,5,6);
-	V.show();
-	cout<<"The sum is "<<'v+V'<<endl;
-cout<<"The dot is "<<'v&V'<<endl;
-return 0;
+int main() {
+    myVector V1(1, 2, 3); // I choose a rendom vector for doing oprations
+    myVector V2(4, 5, 6);
+    myVector V3 = V1 + V2; //Addition of 2 vector
+    myVector V4 = V1 * V2; // Cross Product 2 vector
+    int V5 = V1 & V2; 	   // Dot Product 2 vector
+
+    cout <<"Here are example vectors for doing oprations - "<<endl<< "V1: ";
+    V1.print();
+    cout << "V2: ";
+    V2.print();
+    cout << "V1 + V2: ";
+    V3.print();
+    cout << "V1 x V2: ";
+    V4.print();
+    cout << "V1 . V2: " << V5 << "\n";
+
+    return 0;
 }
+
